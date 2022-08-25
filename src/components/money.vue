@@ -15,7 +15,7 @@ export default {
     };
   },
   props: {
-    modelValue: [Number],
+    modelValue: [Number, String],
   },
   mounted() {
     if (this.modelValue !== "" && this.modelValue !== 0) {

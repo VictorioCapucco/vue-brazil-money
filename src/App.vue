@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <p>{{ test }}</p>
-    <money v-model="test" />
+    <money v-model="test" id="input" />
   </div>
 </template>
 
