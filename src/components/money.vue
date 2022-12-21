@@ -3,12 +3,12 @@
     v-model="money"
     v-bind="$attrs"
     onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-    @input="formatMoney($event.target.value, $event.inputType)"
+    @input="formatMoney($event.target.value)"
   />
 </template>
 <script>
 export default {
-  name: "vue-brazillian-money",
+  name: "vue-brazil-money",
   data() {
     return {
       money: "",
@@ -16,68 +16,72 @@ export default {
   },
   props: {
     modelValue: [Number, String],
-  },
-  mounted() {
-    if (this.modelValue !== "" && this.modelValue !== 0) {
-      this.formatMoney(this.modelValue, "initialValue");
-    }
+    decimal: {
+      type: Number,
+      default: 2,
+    },
   },
   methods: {
     updateInput(maskedValue, floatValue) {
-      this.$emit(
-        "update:modelValue",
-        Number(floatValue) !== 0 ? floatValue : 0
-      );
-      this.money = Number(floatValue) !== 0 ? `R$ ${maskedValue}` : "";
+      this.$emit("update:modelValue", floatValue);
+      this.money = maskedValue;
     },
-    formatMoney(value, event) {
-      let number = "";
-      if (event === "insertFromPaste" || event === "initialValue") {
-        if (!isNaN(value)) {
-          if (String(value).includes(".")) {
-            let splitValue = value.split(".");
-            number = `${splitValue[0]}.${splitValue[1]}`;
-            if (splitValue[1].length < 2) number += 0;
-          } else {
-            number = `${value}.00`;
-          }
-        }
-      } else {
-        number = value;
+    fillWithZeros(strValue) {
+      let filledStr = strValue.split("").reverse().join("");
+      while (filledStr.length < this.decimal + 1) {
+        filledStr += "0";
       }
-      number = number.replace(/[^0-9]/g, "");
-      if (number.length < 3) {
-        number = number.split("").reverse().join("");
-        while (number.length < 3) number += "0";
-        number = number.split("").reverse().join("");
-        this.updateInput(
-          `${number[0]},${number[1]}${number[2]}`,
-          `${number[0]}.${number[1]}${number[2]}`
-        );
-      } else if (number[0] === "0") {
-        this.updateInput(
-          `${number[1]},${number[2]}${number[3]}`,
-          `${number[1]}.${number[2]}${number[3]}`
-        );
-      } else {
-        let revert = number.split("").reverse().join("");
-        let saida = `${revert[0]}${revert[1]},`;
-        let contador = 0;
-        for (let i = 2; i < revert.length; i++) {
-          if (contador === 3) {
-            saida += ".";
-            contador = 0;
-          }
-          saida += revert[i];
-          contador += 1;
-        }
-        this.updateInput(
-          saida.split("").reverse().join(""),
-          `${number.substring(0, number.length - 2)}.${number.substring(
-            number.length - 2
-          )}`
-        );
+      return filledStr.split("").reverse().join("");
+    },
+    formatMoney(value) {
+      let strValue = String(value).replace(/[^0-9]/g, "");
+
+      if (strValue.length < this.decimal + 1) {
+        strValue = this.fillWithZeros(strValue);
+      } else if (strValue.length >= this.decimal + 2) {
+        if (strValue.substring(0, 1) === "0") strValue = strValue.substring(1);
       }
+
+      let afterDecimalPoint = strValue
+        .split("")
+        .reverse()
+        .join("")
+        .substring(0, this.decimal)
+        .split("")
+        .reverse()
+        .join("");
+      let beforeDecimalPoint = String(
+        Number(strValue.substring(0, strValue.length - this.decimal))
+      );
+
+      let beforeDecimalPointWithDot = "";
+      let beforeDecimalPointArray = beforeDecimalPoint.split("").reverse();
+
+      for (
+        let i = 0;
+        beforeDecimalPointArray.length > 0 &&
+        i < beforeDecimalPointArray.length;
+        i++
+      ) {
+        beforeDecimalPointWithDot += beforeDecimalPointArray[i];
+        if ((i + 1) % 3 === 0 && beforeDecimalPointArray.length - i > 1) {
+          beforeDecimalPointWithDot += ".";
+        }
+      }
+      beforeDecimalPointWithDot = beforeDecimalPointWithDot
+        .split("")
+        .reverse("")
+        .join("");
+      beforeDecimalPointWithDot =
+        beforeDecimalPointWithDot === "" ||
+        Number(beforeDecimalPointWithDot.replace(".", "")) === 0
+          ? "0"
+          : beforeDecimalPointWithDot;
+
+      this.updateInput(
+        "R$ " + (beforeDecimalPointWithDot + "," + afterDecimalPoint),
+        beforeDecimalPointWithDot.replaceAll(".", "") + "." + afterDecimalPoint
+      );
     },
   },
 };
