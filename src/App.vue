@@ -1,7 +1,8 @@
 <template>
-  <div id="app">
-    <p>{{ test }}</p>
-    <money v-model="test" id="input" />
+  <div>
+    <p>Returned value {{ test }}</p>
+    Formatted value:
+    <money v-model="test" :decimalPlaces="5" class="text-red" />
   </div>
 </template>
 
@@ -19,3 +20,8 @@ export default {
   },
 };
 </script>
+<style>
+.text-red {
+  color: red;
+}
+</style>

@@ -16,7 +16,7 @@ export default {
   },
   props: {
     modelValue: [Number, String],
-    decimal: {
+    decimalPlaces: {
       type: Number,
       default: 2,
     },
@@ -28,7 +28,7 @@ export default {
     },
     fillWithZeros(strValue) {
       let filledStr = strValue.split("").reverse().join("");
-      while (filledStr.length < this.decimal + 1) {
+      while (filledStr.length < this.decimalPlaces + 1) {
         filledStr += "0";
       }
       return filledStr.split("").reverse().join("");
@@ -36,9 +36,9 @@ export default {
     formatMoney(value) {
       let strValue = String(value).replace(/[^0-9]/g, "");
 
-      if (strValue.length < this.decimal + 1) {
+      if (strValue.length < this.decimalPlaces + 1) {
         strValue = this.fillWithZeros(strValue);
-      } else if (strValue.length >= this.decimal + 2) {
+      } else if (strValue.length >= this.decimalPlaces + 2) {
         if (strValue.substring(0, 1) === "0") strValue = strValue.substring(1);
       }
 
@@ -46,12 +46,12 @@ export default {
         .split("")
         .reverse()
         .join("")
-        .substring(0, this.decimal)
+        .substring(0, this.decimalPlaces)
         .split("")
         .reverse()
         .join("");
       let beforeDecimalPoint = String(
-        Number(strValue.substring(0, strValue.length - this.decimal))
+        Number(strValue.substring(0, strValue.length - this.decimalPlaces))
       );
 
       let beforeDecimalPointWithDot = "";
