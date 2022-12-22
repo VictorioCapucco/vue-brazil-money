@@ -1,6 +1,6 @@
 {
   "name": "vue-brazil-money",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "contributors": [
     "Victorio Capucco",
     "Wellington Rosendo"
@@ -10,6 +10,7 @@
   "files": [
     "dist/*"
   ],
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/VictorioCapucco/vue-brazil-money"
@@ -57,5 +58,14 @@
     "last 2 versions",
     "not dead",
     "not ie 11"
+  ],
+  "keywords": [
+    "vue",
+    "vue3",
+    "input",
+    "money",
+    "vue-money",
+    "vue3-money",
+    "numeric"
   ]
 }

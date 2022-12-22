@@ -41,7 +41,7 @@ You can pass attributes to input, like disabled, class etc
 </template>
 
 <script>
-import money from "./components/money.vue";
+import money from "vue-brazil-money";
 export default {
   name: "App",
   data() {
@@ -73,6 +73,10 @@ You can inform the decimal places. The default value is 2
 ## Example
 ![Screenshot from 2022-12-21 21-46-58](https://user-images.githubusercontent.com/65973246/209030795-175134ef-a653-4f74-a5a3-6f332fa4519a.png)
 
+
+## Authors
+Victorio Capucco
+Wellington Rosendo
 
 
 ## References
