@@ -1,4 +1,4 @@
-# [![npm](https://img.shields.io/npm/dt/vue-brazil-money.svg)]() [![npm](https://img.shields.io/npm/v/vue-brazil-money-tag.svg)]() [![npm](https://img.shields.io/npm/l/vue-brazil-money-tag.svg)]()
+# [![npm](https://img.shields.io/npm/dt/vue-brazil-money.svg)]() [![npm](https://img.shields.io/npm/v/vue-brazil-money.svg)]() [![npm](https://img.shields.io/npm/l/vue-brazil-money.svg)]()
 
 # vue-brazil-money
 If you just want a Vue 3 library to format brazillian money and don't want to configure anything, this library is perfect to you. https://www.npmjs.com/package/vue-brazil-money
