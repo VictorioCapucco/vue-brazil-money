@@ -5,6 +5,8 @@
     "Victorio Capucco",
     "Wellington Rosendo"
   ],
+  "main": "./dist/vueBrazilMoney.common.js",
+  "description": "If you just want a Vue 3 library to format brazillian money and don't want to configure anything, this library is perfect to you.",
   "files": [
     "dist/*"
   ],
@@ -13,7 +15,6 @@
     "url": "git+https://github.com/VictorioCapucco/vue-brazil-money"
   },
   "scripts": {
-    "main": "./dist/vueBrazilMoney.common.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
