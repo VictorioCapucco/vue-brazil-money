@@ -1,13 +1,42 @@
 # vue-brazil-money
-Esta biblioteca foi feita para facilitar o uso de valores monetários em reais brasileiros (R$) em Vue 3, exibindo o valor formatado e armazenando com duas
-casas decimais em string para uso do desenvolvedor.
+If you just want a Vue 3 library to format brazillian money and don't want to configure anything, this library is perfect to you. 
 
-## Modo de uso
+```
+npm install vue-brazil-money
+```
+
+## How to use
 ```html
 <template>
-  <div id="app">
-    <p>{{ test }}</p>
-    <money v-model="test" id="input" />
+    <money v-model="test" />
+</template>
+
+<script>
+import money from "vue-brazil-money";
+export default {
+  name: "App",
+  data() {
+    return {
+      test: "",
+    };
+  },
+  components: {
+    money,
+  },
+};
+</script>
+```
+
+## Attrs
+```
+You can pass attributes to input, like disabled, class etc
+```
+```html
+<template>
+  <div>
+    <p>Returned value {{ test }}</p>
+    Formatted value:
+    <money v-model="test" id="money-input" class="text-red" />
   </div>
 </template>
 
@@ -25,15 +54,26 @@ export default {
   },
 };
 </script>
+<style>
+.text-red {
+  color: red;
+}
+</style>
+
 ```
 
-## Attrs
+## Props
 ```
-Você pode passar atributos ao componente normalmente, da mesma forma que um input, como por exemplo disabled.
+You can inform the decimal places. The default value is 2
 ```
 ```html
-<money v-model="test" disabled />
+<money v-model="test" :decimalPlaces="5" />
 ```
 
-## Referências para publicação no NPM
+## Example
+![Screenshot from 2022-12-21 21-46-58](https://user-images.githubusercontent.com/65973246/209030795-175134ef-a653-4f74-a5a3-6f332fa4519a.png)
+
+
+
+## References
 "Como criar e publicar uma biblioteca (em Vue) no npm?" -> https://medium.com/tableless/como-criar-e-publicar-uma-biblioteca-em-vue-no-npm-2dff8271ca7d
