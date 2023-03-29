@@ -79,9 +79,9 @@ export default {
           : beforeDecimalPointWithDot;
 
       this.updateInput(
-        "R$ " + (beforeDecimalPointWithDot + "," + afterDecimalPoint),
-        beforeDecimalPointWithDot.replaceAll(".", "") + "." + afterDecimalPoint
-      );
+        "R$ " + (beforeDecimalPointWithDot + (this.decimalPlaces > 0 ? ("," + afterDecimalPoint) : "")),
+        beforeDecimalPointWithDot.replaceAll(".", "") + (this.decimalPlaces > 0 ? ("." + afterDecimalPoint
+      ) : ""));
     },
   },
 };
