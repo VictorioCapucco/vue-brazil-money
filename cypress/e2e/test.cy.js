@@ -1,9 +1,79 @@
 
 
 /* eslint-disable */
-describe('Displayed and returned value', () => {
+describe('2 decimal places', () => {
+    it('Add small integer value', () => {
+        cy.visit('localhost:8080')
+        cy.get('select').select('2')
+        cy.get('#input').type('1000')
+        cy.get('#input')
+            .should('have.value', 'R$ 10,00')
+        cy.get('p').should('contain', '10.00')
+    })
+    it('Add medium value', () => {
+        cy.get('#input').clear()
+        cy.get('#input').type('1500000')
+        cy.get('#input')
+            .should('have.value', 'R$ 15.000,00')
+        cy.get('p').should('contain', '15000.00')
+    })
+    it('Add medium float value', () => {
+        cy.get('#input').clear()
+        cy.get('#input').type('15000010')
+        cy.get('#input')
+            .should('have.value', 'R$ 150.000,10')
+        cy.get('p').should('contain', '150000.10')
+    })
+    it('Add big value', () => {
+        cy.get('#input').clear()
+        cy.get('#input').type('12000000000000000')
+        cy.get('#input')
+            .should('have.value', 'R$ 120.000.000.000.000,00')
+        cy.get('p').should('contain', '120000000000000.00')
+    })
+    it('Add big float value', () => {
+        cy.get('#input').clear()
+        cy.get('#input').type('12000000010')
+        cy.get('#input')
+            .should('have.value', 'R$ 120.000.000,10')
+        cy.get('p').should('contain', '120000000.10')
+    })
+    it('Add non number value', () => {
+        cy.get('#input').clear()
+        cy.get('#input').type('abc')
+        cy.get('#input')
+            .should('have.value', 'R$ 0,00')
+        cy.get('p').should('contain', '0.00')
+    })
+})
+describe('0 decimal places', () => {
+    it('Add small integer value', () => {
+        cy.visit('localhost:8080')
+        cy.get('select').select('0')
+        cy.get('#input').type('1000')
+        cy.get('#input')
+            .should('have.value', 'R$ 1.000')
+        cy.get('p').should('contain', '1000')
+    })
+    it('Add big value', () => {
+        cy.get('#input').clear()
+        cy.get('#input').type('120000000000000')
+        cy.get('#input')
+            .should('have.value', 'R$ 120.000.000.000.000')
+        cy.get('p').should('contain', '120000000000000')
+    })
+    it('Add non number value', () => {
+        cy.get('#input').clear()
+        cy.get('#input').type('abc')
+        cy.get('#input')
+            .should('have.value', 'R$ 0')
+        cy.get('p').should('contain', '0')
+    })
+})
+describe('5 decimal places', () => {
   it('Add small integer value', () => {
       cy.visit('localhost:8080')
+      cy.get('select').select('5')
       cy.get('#input').type('1000')
       cy.get('#input')
           .should('have.value', 'R$ 0,01000')

@@ -36,8 +36,6 @@ You can pass attributes to input, like disabled, class etc
 ```html
 <template>
   <div>
-    <p>Returned value {{ test }}</p>
-    Formatted value:
     <money v-model="test" id="money-input" class="text-red" />
   </div>
 </template>
@@ -77,8 +75,8 @@ You can inform the decimal places. The default value is 2
 
 
 ## Authors
-* Victorio Capucco
-* Wellington Rosendo
+* Victorio Capucco (https://github.com/VictorioCapucco)
+* Wellington Rosendo (https://github.com/wellingtonrosendo)
 
 
 ## References
