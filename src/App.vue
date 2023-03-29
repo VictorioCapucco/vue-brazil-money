@@ -1,8 +1,21 @@
 <template>
   <div>
     <p>Returned value {{ test }}</p>
-    Formatted value:
-    <money v-model="test" :decimalPlaces="5" id="input" class="text-red" />
+    <p>
+      Formatted value:
+      <money
+        v-model="test"
+        :decimalPlaces="decimalPlace"
+        id="input"
+        class="text-red"
+      />
+    </p>
+    <p>
+      Decimal places
+      <select v-model="decimalPlace" id="selectDecimalPlaces">
+        <option v-for="i in 11" :value="i - 1" :key="i">{{ i - 1 }}</option>
+      </select>
+    </p>
   </div>
 </template>
 
@@ -13,6 +26,7 @@ export default {
   data() {
     return {
       test: "",
+      decimalPlace: 0,
     };
   },
   components: {
